@@ -1,5 +1,5 @@
 ---
-title: "Exercise 6: Tilt illusion analysis"
+title: "Exercise 6: Stroop analysis"
 author: "Your name"
 date: '`r Sys.Date()`'
 output:
@@ -23,41 +23,49 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-# Part 1
+# Load data
 
 Loading data
 ```{r warning=FALSE}
 getwd() # make sure you're int the directory you think you are
 
-#load your data in this chunk into a variable dat 
+#load your data in this chunk into a variable stroop_dat 
+
+stroop_dat  <-
+  list.files(path = "../data/", pattern = "*.csv",full.names = TRUE) %>% 
+  map_df(~read.csv(.))
+stroop_dat
+
 
 ```
 # Part 2
 
-Adding helper columns
-```{r warning=FALSE}
-dat %>% mutate()
-```
+## Write down below the shell command(s) you used to concatenate all the individual data into a single CSV file
+
 
 # Part 3
 
-Some descriptive stats
+## Compute correct RTs only
 
-```{r warning=FALSE}
-
-
-```
-
-```{r warning=FALSE}
-
+Whenever we look at RTs, we don't want to mix together RTs from correct and incorrect responses. Subset your data-frame to include only the correct responses. From now on, use this subsetted dataframe.
+```{r}
 
 ```
 
-```{r warning=FALSE}
 
+## Some descriptive stats
+
+What are the group RT means for congruent and incongruent trials?
+```{r warning=FALSE}
 
 ```
 
+What are the group means for congruent and incongruent broken down for the 2 `prop_incongruent` conditions?
+```{r warning=FALSE}
+
+```
+
+Write code that lists all the subj_codes whose overall accuracies are less than one (i.e., less than 100%)
 ```{r warning=FALSE}
 
 
@@ -65,35 +73,56 @@ Some descriptive stats
 
 # Part 4
 
-Practice with pivoting
-
+Use `pivot_wider()` to generate a data-frame containing separate the mean congruent and incongruent trials of each subject, and use mutate() to create an `incongruence_cost` column that is the difference between RTs on incongruent and congruent trials (incongruent-congruent). Sort it so that the subjects with the largest incongruent costs are listed first
 ```{r warning=FALSE}
 
+```
 
+
+
+## Bonus (1 pt)
+
+A larger incongruence cost may come from people being really fasts on the congruent trials, really slow on incongruent trials, or both. Write some code to determine which of these three possibilities are true in these data.
+```{r}
 
 ```
+
+
+Now let's see if the incongruence advantage is different between the 25% and 50% incongruence conditions. 
+Use pivot_wider() again, but this time to get separate incongruence advantage columns for the .25 and .50 prop_incongruent conditions. 
+```{r}
+
+```
+
+
 
 # Part 5
 
-## Graphs
+## Graphing!
+
+Generate a graph showing how the incongruent advantage varies by prop_incongruent (hint: use a line graph, not bars!)
+```{r warning=FALSE}
+
+```
 
 
-This graph shows....
+Generate a graph showing how the incongruent advantage varies by orientation. What are you seeing?
 ```{r warning=FALSE}
 
 
 
 ```
 
-This graph shows....
 
+Figure out an easy-to-interpret way of showing *both* the effect of orientation and the effect of prop_incongruent on the congruency advantage.
 ```{r warning=FALSE}
 
 
 
 ```
 
-This graph shows....
+
+Show how the incongruency advantage varies with trial number. Is it getting larger? Smaller? Is the trend similar for the 25% nd 50% prop_incongruent condition?
 ```{r warning=FALSE}
 
 
